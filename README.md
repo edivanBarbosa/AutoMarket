@@ -1,16 +1,58 @@
-# React + Vite
+# AutoMarket
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema de gerenciamento de veículos desenvolvido para cadastro, listagem e controle de automóveis.  
+Projeto Full Stack utilizando React no front-end e integração com backend e banco de dados.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Sobre o Projeto
 
-## React Compiler
+O **AutoMarket** é uma aplicação web desenvolvida com foco em praticar conceitos modernos de desenvolvimento Full Stack, incluindo:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Estruturação de API
+- Conexão com banco de dados
+- Organização de componentes React
+- Boas práticas de versionamento com Git
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tecnologias Utilizadas
+
+### Front-end
+- React
+- Vite
+- JavaScript
+- CSS
+
+### Back-end
+- Node.js
+- Express
+
+### Banco de Dados
+- MongoDB
+
+---
+
+## Estrutura do Projeto
+AutoMarket/
+│
+├── frontend/
+│ ├── src/
+│ └── package.json
+│
+├── backend/
+│ ├── src/
+│ └── package.json
+│
+└── README.md
+
+---
+
+##  Como Executar o Projeto
+
+###  1. Clonar o repositório
+
+```bash
+git clone https://github.com/seu-usuario/AutoMarket.git
+
+
