@@ -29,9 +29,9 @@ O **AutoMarket** é uma aplicação web desenvolvida com foco em praticar concei
 - Express
 
 ### Banco de Dados
-- MongoDB
+- supabase
 
----
+---postgres
 
 ## Estrutura do Projeto
 AutoMarket/
