@@ -1,18 +1,24 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Login from './pages/Login';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+// O NOVO IMPORT VAI AQUI:
+import CadastrarVeiculo from "./pages/Veiculos";
+
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        {/* Rota para a página inicial */}
+
         <Route path="/" element={<Home />} />
-        
-        {/* Rota para a página de login */}
+
         <Route path="/login" element={<Login />} />
+
+        {/* E A ROTA VAI AQUI: */}
+        <Route path="/cadastrar-veiculo" element={<CadastrarVeiculo />} />
+
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 

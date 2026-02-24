@@ -1,26 +1,23 @@
 import { useEffect, useState } from 'react';
-// Se o supabase.js está na pasta 'src' e este arquivo em 'src/pages/Home'
-// use '../../supabase' (dois níveis para cima)
 import { supabase } from '../../services/supabase';
-import './Home.css';
 import { Link } from 'react-router-dom';
+import './Home.css';
 
 const Home = () => {
-  const [cars, setCars] = useState([]);
+  const [veiculos, setVeiculos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchCars = async () => {
+  const fetchVeiculos = async () => {
     try {
       setLoading(true);
-      // Aqui buscamos os dados REAIS do seu banco
+      // Buscamos da tabela oficial 'veiculos'
       const { data, error } = await supabase
-        .from('cars')
-        .select('*');
+        .from('veiculos')
+        .select('*')
+        .order('created_at', { ascending: false });
 
       if (error) throw error;
-
-      setCars(data);
-      console.log('Dados carregados com sucesso:', data);
+      setVeiculos(data);
     } catch (error) {
       console.error('Erro ao buscar dados:', error.message);
     } finally {
@@ -29,7 +26,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetchCars();
+    fetchVeiculos();
   }, []);
 
   return (
@@ -37,10 +34,9 @@ const Home = () => {
       <header className="home-header">
         <h1>AutoCAR</h1>
         <nav>
-          <a href="#">Início</a>
-          <a href="#">Anunciar carro</a>
+          <Link to="/">Início</Link>
+          <Link to="/cadastrar-veiculo">Anunciar carro</Link>
           <Link to="/login" className="btn-outline">Entrar</Link>
-          <button className="btn-primary">Cadastrar</button>
         </nav>
       </header>
 
@@ -60,19 +56,38 @@ const Home = () => {
           {loading ? (
             <p>Carregando veículos do banco...</p>
           ) : (
-            cars.map((car) => (
-              <div className="car-card" key={car.id}>
-                {/* Agora usamos o link que está na sua coluna image_url */}
-                <img src={car.image_url} alt={car.title} />
-                <h4>{car.title}</h4>
-                <p>R$ {Number(car.price).toLocaleString('pt-BR')}</p>
-                <span>{car.city}</span>
+            veiculos.map((v) => (
+              <div className="car-card" key={v.id}>
+                {/* Lógica de imagem: Prioriza o array 'fotos', senão usa placeholder */}
+                <img
+                  src={v.fotos && v.fotos.length > 0 ? v.fotos[0] : 'https://via.placeholder.com/400x300?text=Sem+Foto'}
+                  alt={v.titulo}
+                />
+                
+                <div className="car-card-content">
+                  <h4>{v.titulo}</h4>
+                  <p className="price">R$ {Number(v.preco).toLocaleString('pt-BR')}</p>
+                  
+                  <div className="car-footer">
+                    <span>{v.cidade}</span>
+                    {v.contato && (
+                      <a
+                        href={`https://wa.me/55${v.contato.replace(/\D/g, '')}?text=Olá! Vi o anúncio do ${v.titulo} no AutoCAR.`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-whats-mini"
+                      >
+                        WhatsApp
+                      </a>
+                    )}
+                  </div>
+                </div>
               </div>
             ))
           )}
 
-          {!loading && cars.length === 0 && (
-            <p>Nenhum carro encontrado. Verifique o RLS no Supabase!</p>
+          {!loading && veiculos.length === 0 && (
+            <p>Nenhum veículo encontrado no momento.</p>
           )}
         </div>
       </section>
